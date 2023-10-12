@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'fundamentalscreen.dart';
+import 'cumulativescreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,32 +11,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Activities App',
-      home: Scaffold(
-        body: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Text('Hello', style: TextStyle(fontSize: 26)),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+            appBar: AppBar(
+              bottom: const TabBar(
+                tabs: [
+                  Tab(icon: Icon(Icons.accessible)),
+                  Tab(icon: Icon(Icons.accessible_forward))
+                ],
               ),
-              SizedBox(
-                width: 500,
-                child: TextField(
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter Value',
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+            ),
+            body: const TabBarView(
+              clipBehavior: Clip.antiAlias,
+              children: [
+                FundaScreen(),
+                CumuScreen(),
+              ],
+            )),
       ),
     );
   }
