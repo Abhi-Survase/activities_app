@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 int num = 22;
 int ans = 0;
@@ -10,7 +11,7 @@ class FundaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var fundaAnsList = <int>[];
-    fundaAnsList.clear();
+
     for (int i = 0; i <= steps; i++) {
       ans += num;
       fundaAnsList.add(ans);
@@ -45,26 +46,39 @@ class FundaScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const TextField(
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      controller: TextEditingController(text: ''),
+                      onSubmitted: (val) async {
+                        num = val as int;
+                        print(num);
+                      },
                       maxLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter Starting Value',
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 12, bottom: 12),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
                       child: TextField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         maxLines: 1,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Enter Fundamental Number',
                         ),
                       ),
                     ),
-                    const TextField(
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       maxLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter Number of Steps',
                       ),
@@ -80,7 +94,9 @@ class FundaScreen extends StatelessWidget {
                                 MaterialStatePropertyAll(Colors.blueGrey),
                             foregroundColor:
                                 MaterialStatePropertyAll(Colors.white)),
-                        onPressed: () {},
+                        onPressed: () {
+                          fundaAnsList.clear();
+                        },
                         icon: const Icon(Icons.calculate_outlined),
                         label: const Text(
                           'Calculate',

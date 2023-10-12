@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 int num = 22;
 int ans = 0;
@@ -10,7 +11,7 @@ class CumuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cumuAnsList = <int>[];
-    cumuAnsList.clear();
+
     if (num >= 0) {
       for (int i = 0; i < steps; i++) {
         ans = (num + i) + ans;
@@ -44,26 +45,34 @@ class CumuScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const TextField(
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       maxLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter Starting Value',
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 12, bottom: 12),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
                       child: TextField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         maxLines: 1,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Enter Cumulative Number',
                         ),
                       ),
                     ),
-                    const TextField(
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       maxLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter Number of Steps',
                       ),
@@ -79,7 +88,9 @@ class CumuScreen extends StatelessWidget {
                                 MaterialStatePropertyAll(Colors.blueGrey),
                             foregroundColor:
                                 MaterialStatePropertyAll(Colors.white)),
-                        onPressed: () {},
+                        onPressed: () {
+                          cumuAnsList.clear();
+                        },
                         icon: const Icon(Icons.calculate_outlined),
                         label: const Text(
                           'Calculate',
