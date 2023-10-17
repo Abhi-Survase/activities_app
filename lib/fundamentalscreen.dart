@@ -52,8 +52,8 @@ class _FundaScreenState extends State<FundaScreen> {
             children: [
               const Padding(
                 padding: EdgeInsets.all(20),
-                child:
-                    Text('Continuous Addition', style: TextStyle(fontSize: 26)),
+                child: Text('Continuous Calculation',
+                    style: TextStyle(fontSize: 26)),
               ),
               SizedBox(
                 width: 300,
@@ -86,7 +86,7 @@ class _FundaScreenState extends State<FundaScreen> {
                         keyboardType: TextInputType.number,
                         controller: finNumCtrl,
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
                         ],
                         onChanged: (fNumVal) async {
                           num = int.parse(fNumVal);

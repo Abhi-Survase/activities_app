@@ -62,7 +62,7 @@ class _CumuScreenState extends State<CumuScreen> {
               const Padding(
                 padding: EdgeInsets.all(20),
                 child:
-                    Text('Continuous Addition', style: TextStyle(fontSize: 26)),
+                    Text('Gradual Calculation', style: TextStyle(fontSize: 26)),
               ),
               SizedBox(
                 width: 300,
