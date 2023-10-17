@@ -108,7 +108,7 @@ class _CumuScreenState extends State<CumuScreen> {
                         maxLines: 1,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Enter Cumulative Number',
+                          labelText: 'Start Cumulative From',
                         ),
                       ),
                     ),
