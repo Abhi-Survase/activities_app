@@ -27,9 +27,10 @@ class _FundaScreenState extends State<FundaScreen> {
       //print('step ${i + 1}: $ans');
     }
     for (int i = 0; i < fundaAnsList.length; i++) {
-      // var jay = fundaAnsList[i].toString();
+      var jay = fundaAnsList[i].toString();
+      var ind = (i + 1).toString();
       //print(fundaAnsList[i]);
-      fundaAnsStringList.add(fundaAnsList[i].toString());
+      fundaAnsStringList.add('$ind:  $jay ');
     }
     //  var currentanspointer = 0;
     // final currentans = fundaAnsList[currentanspointer];
