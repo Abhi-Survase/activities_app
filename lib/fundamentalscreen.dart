@@ -16,6 +16,9 @@ class FundaScreen extends StatefulWidget {
 class _FundaScreenState extends State<FundaScreen> {
   @override
   Widget build(BuildContext context) {
+    final finAnsCtrl = TextEditingController();
+    final finNumCtrl = TextEditingController();
+    final finStepsCtrl = TextEditingController();
     var fundaAnsList = <int>[];
     var fundaAnsStringList = <String>[];
     for (int i = 0; i < steps; i++) {
@@ -60,6 +63,7 @@ class _FundaScreenState extends State<FundaScreen> {
                     TextField(
                       keyboardType: TextInputType.number,
                       autocorrect: false,
+                      controller: finAnsCtrl,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (fAnsVal) async {
                         ans = int.parse(fAnsVal);
@@ -79,6 +83,7 @@ class _FundaScreenState extends State<FundaScreen> {
                       padding: const EdgeInsets.only(top: 12, bottom: 12),
                       child: TextField(
                         keyboardType: TextInputType.number,
+                        controller: finNumCtrl,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
@@ -100,6 +105,7 @@ class _FundaScreenState extends State<FundaScreen> {
                     TextField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      controller: finStepsCtrl,
                       onChanged: (fStepsVal) async {
                         steps = int.parse(fStepsVal);
                         //print(fStepsVal);
@@ -117,6 +123,7 @@ class _FundaScreenState extends State<FundaScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           OutlinedButton.icon(
@@ -129,7 +136,6 @@ class _FundaScreenState extends State<FundaScreen> {
                                 foregroundColor:
                                     MaterialStatePropertyAll(Colors.white)),
                             onPressed: () {
-                              //fundaAnsStringList.clear();
                               setState(() {});
                             },
                             icon: const Icon(Icons.calculate_outlined),
@@ -138,18 +144,31 @@ class _FundaScreenState extends State<FundaScreen> {
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
-                          TextButton.icon(
-                              onPressed: () {
-                                fundaAnsList.clear();
-                                num = 0;
-                                ans = 0;
-                                steps = 0;
-                                setState(() {
-                                  fundaAnsStringList.clear;
-                                });
-                              },
-                              label: const Text('Clear Ans'),
-                              icon: const Icon(Icons.close))
+                          Padding(
+                              padding: const EdgeInsets.only(left: 9),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                                radius: 20,
+                                child: IconButton(
+                                  onPressed: () {
+                                    fundaAnsList.clear();
+                                    num = 0;
+                                    ans = 0;
+                                    steps = 0;
+                                    finAnsCtrl.clear();
+                                    finNumCtrl.clear();
+                                    finStepsCtrl.clear();
+                                    setState(() {
+                                      fundaAnsStringList.clear;
+                                    });
+                                  },
+                                  splashColor: Colors.red,
+                                  splashRadius: 22,
+                                  icon: const Icon(Icons.close,
+                                      color: Colors.white),
+                                ),
+                              ))
                         ],
                       ),
                     )
