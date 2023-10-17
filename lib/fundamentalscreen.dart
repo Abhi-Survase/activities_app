@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-int num = 22;
 int ans = 0;
-int steps = 30;
+int num = 0;
+int steps = 0;
 
-class FundaScreen extends StatelessWidget {
+class FundaScreen extends StatefulWidget {
   const FundaScreen({super.key});
+  @override
+  State<FundaScreen> createState() {
+    return _FundaScreenState();
+  }
+}
 
+class _FundaScreenState extends State<FundaScreen> {
   @override
   Widget build(BuildContext context) {
     var fundaAnsList = <int>[];
-
-    for (int i = 0; i <= steps; i++) {
+    var fundaAnsStringList = <String>[];
+    for (int i = 0; i < steps; i++) {
       ans += num;
       fundaAnsList.add(ans);
       //print('step ${i + 1}: $ans');
+    }
+    for (int i = 0; i < fundaAnsList.length; i++) {
+      // var jay = fundaAnsList[i].toString();
+      //print(fundaAnsList[i]);
+      fundaAnsStringList.add(fundaAnsList[i].toString());
     }
     //  var currentanspointer = 0;
     // final currentans = fundaAnsList[currentanspointer];
@@ -48,11 +59,15 @@ class FundaScreen extends StatelessWidget {
                   children: [
                     TextField(
                       keyboardType: TextInputType.number,
+                      autocorrect: false,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      controller: TextEditingController(text: ''),
-                      onSubmitted: (val) async {
-                        num = val as int;
-                        print(num);
+                      onChanged: (fAnsVal) async {
+                        ans = int.parse(fAnsVal);
+                        //print(ans);
+                      },
+                      onSubmitted: (fAnsVal) async {
+                        ans = int.parse(fAnsVal);
+                        //print(ans);
                       },
                       maxLines: 1,
                       decoration: const InputDecoration(
@@ -67,6 +82,14 @@ class FundaScreen extends StatelessWidget {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
+                        onChanged: (fNumVal) async {
+                          num = int.parse(fNumVal);
+                          //print(num);
+                        },
+                        onSubmitted: (fNumVal) async {
+                          num = int.parse(fNumVal);
+                          //print(num);
+                        },
                         maxLines: 1,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -77,6 +100,14 @@ class FundaScreen extends StatelessWidget {
                     TextField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (fStepsVal) async {
+                        steps = int.parse(fStepsVal);
+                        //print(fStepsVal);
+                      },
+                      onSubmitted: (fStepsVal) async {
+                        steps = int.parse(fStepsVal);
+                        //print(fStepsVal);
+                      },
                       maxLines: 1,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -85,23 +116,41 @@ class FundaScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
-                      child: OutlinedButton.icon(
-                        style: const ButtonStyle(
-                            elevation: MaterialStatePropertyAll(5),
-                            fixedSize:
-                                MaterialStatePropertyAll(Size.fromHeight(35)),
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.blueGrey),
-                            foregroundColor:
-                                MaterialStatePropertyAll(Colors.white)),
-                        onPressed: () {
-                          fundaAnsList.clear();
-                        },
-                        icon: const Icon(Icons.calculate_outlined),
-                        label: const Text(
-                          'Calculate',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          OutlinedButton.icon(
+                            style: const ButtonStyle(
+                                elevation: MaterialStatePropertyAll(5),
+                                fixedSize: MaterialStatePropertyAll(
+                                    Size.fromHeight(35)),
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.blueGrey),
+                                foregroundColor:
+                                    MaterialStatePropertyAll(Colors.white)),
+                            onPressed: () {
+                              //fundaAnsStringList.clear();
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.calculate_outlined),
+                            label: const Text(
+                              'Calculate',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          TextButton.icon(
+                              onPressed: () {
+                                fundaAnsList.clear();
+                                num = 0;
+                                ans = 0;
+                                steps = 0;
+                                setState(() {
+                                  fundaAnsStringList.clear;
+                                });
+                              },
+                              label: const Text('Clear Ans'),
+                              icon: const Icon(Icons.close))
+                        ],
                       ),
                     )
                   ],
@@ -123,15 +172,13 @@ class FundaScreen extends StatelessWidget {
                 child: SelectableRegion(
                   focusNode: FocusNode(),
                   selectionControls: materialTextSelectionControls,
-                  child: ListView(
+                  child: ListView.builder(
+                    itemCount: fundaAnsStringList.length,
                     scrollDirection: Axis.vertical,
-                    children: [
-                      ...fundaAnsList.map((e) {
-                        var jay = e.toString();
-
-                        return Text('$jay ');
-                      })
-                    ],
+                    itemBuilder: (BuildContext context, int index) {
+                      // print(index);
+                      return Text(fundaAnsStringList[index]);
+                    },
                   ),
                 ),
               ),
