@@ -12,15 +12,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(useMaterial3: true),
       title: 'Activities App',
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
             appBar: AppBar(
-              bottom: const TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.accessible)),
-                  Tab(icon: Icon(Icons.accessible_forward))
+              centerTitle: true,
+              backgroundColor: Colors.blue[700],
+              foregroundColor: Colors.white,
+              title:
+                  const Text('Activities App', style: TextStyle(fontSize: 26)),
+              bottom: TabBar(
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicator: const ShapeDecoration(
+                  shape: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 3.5,
+                      color: Colors.amber,
+                    ),
+                  ),
+                ),
+                dividerColor: Colors.blue[800],
+                tabs: const [
+                  Tab(icon: Icon(Icons.calculate, color: Colors.white)),
+                  Tab(icon: Icon(Icons.calculate_outlined, color: Colors.white))
                 ],
               ),
             ),

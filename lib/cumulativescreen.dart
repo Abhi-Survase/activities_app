@@ -140,7 +140,7 @@ class _CumuScreenState extends State<CumuScreen> {
                             style: const ButtonStyle(
                                 elevation: MaterialStatePropertyAll(5),
                                 fixedSize: MaterialStatePropertyAll(
-                                    Size.fromHeight(35)),
+                                    Size.fromHeight(40)),
                                 backgroundColor:
                                     MaterialStatePropertyAll(Colors.blueGrey),
                                 foregroundColor:
@@ -151,7 +151,7 @@ class _CumuScreenState extends State<CumuScreen> {
                             icon: const Icon(Icons.calculate_outlined),
                             label: const Text(
                               'Calculate',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
                           Padding(

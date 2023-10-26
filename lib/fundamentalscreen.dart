@@ -131,7 +131,7 @@ class _FundaScreenState extends State<FundaScreen> {
                             style: const ButtonStyle(
                                 elevation: MaterialStatePropertyAll(5),
                                 fixedSize: MaterialStatePropertyAll(
-                                    Size.fromHeight(35)),
+                                    Size.fromHeight(40)),
                                 backgroundColor:
                                     MaterialStatePropertyAll(Colors.blueGrey),
                                 foregroundColor:
@@ -140,10 +140,8 @@ class _FundaScreenState extends State<FundaScreen> {
                               setState(() {});
                             },
                             icon: const Icon(Icons.calculate_outlined),
-                            label: const Text(
-                              'Calculate',
-                              style: TextStyle(fontSize: 18),
-                            ),
+                            label: const Text('Calculate',
+                                style: TextStyle(fontSize: 20)),
                           ),
                           Padding(
                               padding: const EdgeInsets.only(left: 9),
