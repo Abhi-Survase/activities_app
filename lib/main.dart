@@ -6,8 +6,9 @@ void main() {
   runApp(const MyApp());
 }
 
-bool theme = true;
-final kColorScheme = ColorScheme.fromSeed(seedColor: Colors.blue[600]!);
+bool lighttheme = true;
+var currentTheme = ThemeMode.light;
+final kColorScheme = ColorScheme.fromSeed(seedColor: Colors.blue[500]!);
 final kDarkColorScheme = ColorScheme.fromSeed(
     brightness: Brightness.dark, seedColor: Colors.blue[800]!);
 
@@ -52,9 +53,14 @@ class _MyApp extends State<MyApp> {
             actions: [
               IconButton(
                   onPressed: () {
-                    changeTheme(
-                      (theme == true ? ThemeMode.dark : ThemeMode.light),
-                    );
+                    if (lighttheme == true) {
+                      currentTheme = ThemeMode.dark;
+                      lighttheme = false;
+                    } else if (lighttheme == false) {
+                      currentTheme = ThemeMode.light;
+                      lighttheme = true;
+                    }
+                    changeTheme((currentTheme));
                   },
                   icon: const Icon(Icons.dark_mode))
             ],
