@@ -6,47 +6,91 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+bool theme = true;
+final kColorScheme = ColorScheme.fromSeed(seedColor: Colors.blue[600]!);
+final kDarkColorScheme = ColorScheme.fromSeed(
+    brightness: Brightness.dark, seedColor: Colors.blue[800]!);
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() {
+    return _MyApp();
+  }
+}
+
+class _MyApp extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+  void changeTheme(ThemeMode themeMode) {
+    setState(
+      () {
+        _themeMode = themeMode;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData().copyWith(
+        colorScheme: kColorScheme,
+        useMaterial3: true,
+        scaffoldBackgroundColor: kColorScheme.background,
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        useMaterial3: true,
+        colorScheme: kDarkColorScheme,
+        scaffoldBackgroundColor: kDarkColorScheme.background,
+      ),
+      themeMode: _themeMode,
       title: 'Activities App',
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              backgroundColor: Colors.blue[700],
-              foregroundColor: Colors.white,
-              title:
-                  const Text('Activities App', style: TextStyle(fontSize: 26)),
-              bottom: TabBar(
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicator: const ShapeDecoration(
-                  shape: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 3.5,
-                      color: Colors.amber,
-                    ),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    changeTheme(
+                      (theme == true ? ThemeMode.dark : ThemeMode.light),
+                    );
+                  },
+                  icon: const Icon(Icons.dark_mode))
+            ],
+            backgroundColor: kColorScheme.primary,
+            foregroundColor: kColorScheme.onPrimary,
+            title: const Text('Activities App', style: TextStyle(fontSize: 26)),
+            bottom: TabBar(
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicator: const ShapeDecoration(
+                shape: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 3.5,
+                    color: Colors.amber,
                   ),
                 ),
-                dividerColor: Colors.blue[800],
-                tabs: const [
-                  Tab(icon: Icon(Icons.calculate, color: Colors.white)),
-                  Tab(icon: Icon(Icons.calculate_outlined, color: Colors.white))
-                ],
               ),
-            ),
-            body: const TabBarView(
-              clipBehavior: Clip.antiAlias,
-              children: [
-                FundaScreen(),
-                CumuScreen(),
+              dividerColor: kColorScheme.onError,
+              tabs: [
+                Tab(
+                  icon: Icon(Icons.calculate, color: kColorScheme.onPrimary),
+                ),
+                Tab(
+                  icon: Icon(Icons.calculate_outlined,
+                      color: kColorScheme.onPrimary),
+                )
               ],
-            )),
+            ),
+          ),
+          body: const TabBarView(
+            clipBehavior: Clip.antiAlias,
+            children: [
+              FundaScreen(),
+              CumuScreen(),
+            ],
+          ),
+        ),
       ),
     );
   }
