@@ -24,15 +24,26 @@ class _CumuScreenState extends State<CumuScreen> {
     var cumuAnsList = <int>[];
     var cumuAnsStringlist = <String>[];
 
-    if (num >= 0) {
+    if (num >= 0 && steps > 0) {
       for (int i = 0; i < steps; i++) {
         ans = (num + i) + ans;
         cumuAnsList.add(ans);
       }
-    } else {
+    } else if (num < 0 && steps > 0) {
       for (int i = 0; i < steps; i++) {
         ans += (num - i);
         cumuAnsList.add(ans);
+      }
+    } else if (num >= 0 && steps < 0) {
+      for (int i = 0; i > steps; i--) {
+        ans = (num + i) + ans;
+        cumuAnsList.add(ans);
+      }
+    } else if (num < 0 && steps < 0) {
+      for (int i = 0; i > steps; i--) {
+        ans = ans + num;
+        cumuAnsList.add(ans);
+        num = num + 1; //incrementing the value by 1
       }
     }
 
@@ -73,12 +84,13 @@ class _CumuScreenState extends State<CumuScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true),
                             autocorrect: false,
                             controller: cinAnsCtrl,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
                             onChanged: (cAnsVal) async {
                               ans = int.parse(cAnsVal);
                               //print(ans);
@@ -96,11 +108,13 @@ class _CumuScreenState extends State<CumuScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12, bottom: 12),
                             child: TextField(
-                              keyboardType: TextInputType.number,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true),
                               controller: cinNumCtrl,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
+                              // inputFormatters: [
+                              //   FilteringTextInputFormatter.digitsOnly
+                              // ],
                               onChanged: (cNumVal) async {
                                 num = int.parse(cNumVal);
                                 //print(num);
@@ -117,10 +131,11 @@ class _CumuScreenState extends State<CumuScreen> {
                             ),
                           ),
                           TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true),
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
                             controller: cinStepsCtrl,
                             onChanged: (cStepsVal) async {
                               steps = int.parse(cStepsVal);
@@ -144,13 +159,13 @@ class _CumuScreenState extends State<CumuScreen> {
                               children: [
                                 OutlinedButton.icon(
                                   style: const ButtonStyle(
-                                      elevation: MaterialStatePropertyAll(5),
-                                      fixedSize: MaterialStatePropertyAll(
+                                      elevation: WidgetStatePropertyAll(5),
+                                      fixedSize: WidgetStatePropertyAll(
                                           Size.fromHeight(40)),
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor: WidgetStatePropertyAll(
                                           Colors.blueGrey),
-                                      foregroundColor: MaterialStatePropertyAll(
-                                          Colors.white)),
+                                      foregroundColor:
+                                          WidgetStatePropertyAll(Colors.white)),
                                   onPressed: () {
                                     setState(() {});
                                   },
@@ -241,15 +256,16 @@ class _CumuScreenState extends State<CumuScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true),
                             autocorrect: false,
                             style: const TextStyle(
                               height: 0.75,
                             ),
                             controller: cinAnsCtrl,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
                             onChanged: (cAnsVal) async {
                               ans = int.parse(cAnsVal);
                               //print(ans);
@@ -267,14 +283,16 @@ class _CumuScreenState extends State<CumuScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12, bottom: 12),
                             child: TextField(
-                              keyboardType: TextInputType.number,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true),
                               style: const TextStyle(
                                 height: 0.75,
                               ),
                               controller: cinNumCtrl,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
+                              // inputFormatters: [
+                              //   FilteringTextInputFormatter.digitsOnly
+                              // ],
                               onChanged: (cNumVal) async {
                                 num = int.parse(cNumVal);
                                 //print(num);
@@ -291,13 +309,14 @@ class _CumuScreenState extends State<CumuScreen> {
                             ),
                           ),
                           TextField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true),
                             style: const TextStyle(
                               height: 0.75,
                             ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
                             controller: cinStepsCtrl,
                             onChanged: (cStepsVal) async {
                               steps = int.parse(cStepsVal);
@@ -321,13 +340,13 @@ class _CumuScreenState extends State<CumuScreen> {
                               children: [
                                 OutlinedButton.icon(
                                   style: const ButtonStyle(
-                                      elevation: MaterialStatePropertyAll(5),
-                                      fixedSize: MaterialStatePropertyAll(
+                                      elevation: WidgetStatePropertyAll(5),
+                                      fixedSize: WidgetStatePropertyAll(
                                           Size.fromHeight(30)),
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor: WidgetStatePropertyAll(
                                           Colors.blueGrey),
-                                      foregroundColor: MaterialStatePropertyAll(
-                                          Colors.white)),
+                                      foregroundColor:
+                                          WidgetStatePropertyAll(Colors.white)),
                                   onPressed: () {
                                     setState(() {});
                                   },
@@ -402,6 +421,10 @@ class _CumuScreenState extends State<CumuScreen> {
                       ),
                     ),
                   ),
+                ),
+                const Text(
+                  "github.com/Abhi-Survase/activities_app",
+                  style: TextStyle(color: Color.fromARGB(120, 158, 158, 158)),
                 ),
               ],
             )),

@@ -36,13 +36,11 @@ class _MyApp extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData().copyWith(
         colorScheme: kColorScheme,
-        useMaterial3: true,
-        scaffoldBackgroundColor: kColorScheme.background,
+        scaffoldBackgroundColor: kColorScheme.surface,
       ),
       darkTheme: ThemeData.dark().copyWith(
-        useMaterial3: true,
         colorScheme: kDarkColorScheme,
-        scaffoldBackgroundColor: kDarkColorScheme.background,
+        scaffoldBackgroundColor: kDarkColorScheme.surface,
       ),
       themeMode: _themeMode,
       title: 'Activities App',

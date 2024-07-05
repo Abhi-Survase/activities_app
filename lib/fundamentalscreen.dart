@@ -65,12 +65,13 @@ class _FundaScreenState extends State<FundaScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true),
                             autocorrect: false,
                             controller: finAnsCtrl,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
                             onChanged: (fAnsVal) async {
                               ans = int.parse(fAnsVal);
                               //print(ans);
@@ -88,11 +89,13 @@ class _FundaScreenState extends State<FundaScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12, bottom: 12),
                             child: TextField(
-                              keyboardType: TextInputType.number,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true),
                               controller: finNumCtrl,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
+                              // inputFormatters: [
+                              //   FilteringTextInputFormatter.digitsOnly,
+                              // ],
                               onChanged: (fNumVal) async {
                                 num = int.parse(fNumVal);
                                 //print(num);
@@ -136,13 +139,13 @@ class _FundaScreenState extends State<FundaScreen> {
                               children: [
                                 OutlinedButton.icon(
                                   style: const ButtonStyle(
-                                      elevation: MaterialStatePropertyAll(5),
-                                      fixedSize: MaterialStatePropertyAll(
+                                      elevation: WidgetStatePropertyAll(5),
+                                      fixedSize: WidgetStatePropertyAll(
                                           Size.fromHeight(40)),
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor: WidgetStatePropertyAll(
                                           Colors.blueGrey),
-                                      foregroundColor: MaterialStatePropertyAll(
-                                          Colors.white)),
+                                      foregroundColor:
+                                          WidgetStatePropertyAll(Colors.white)),
                                   onPressed: () {
                                     setState(() {});
                                   },
@@ -231,15 +234,16 @@ class _FundaScreenState extends State<FundaScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: true),
                             autocorrect: false,
                             style: const TextStyle(
                               height: 0.75,
                             ),
                             controller: finAnsCtrl,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
                             onChanged: (fAnsVal) async {
                               ans = int.parse(fAnsVal);
                               //print(ans);
@@ -257,14 +261,16 @@ class _FundaScreenState extends State<FundaScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 7, bottom: 7),
                             child: TextField(
-                              keyboardType: TextInputType.number,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true),
                               style: const TextStyle(
                                 height: 0.75,
                               ),
                               controller: finNumCtrl,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
+                              // inputFormatters: [
+                              //   FilteringTextInputFormatter.digitsOnly,
+                              // ],
                               onChanged: (fNumVal) async {
                                 num = int.parse(fNumVal);
                                 //print(num);
@@ -311,13 +317,13 @@ class _FundaScreenState extends State<FundaScreen> {
                               children: [
                                 OutlinedButton.icon(
                                   style: const ButtonStyle(
-                                      elevation: MaterialStatePropertyAll(5),
-                                      fixedSize: MaterialStatePropertyAll(
+                                      elevation: WidgetStatePropertyAll(5),
+                                      fixedSize: WidgetStatePropertyAll(
                                           Size.fromHeight(30)),
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor: WidgetStatePropertyAll(
                                           Colors.blueGrey),
-                                      foregroundColor: MaterialStatePropertyAll(
-                                          Colors.white)),
+                                      foregroundColor:
+                                          WidgetStatePropertyAll(Colors.white)),
                                   onPressed: () {
                                     setState(() {});
                                   },
@@ -392,6 +398,10 @@ class _FundaScreenState extends State<FundaScreen> {
                       ),
                     ),
                   ),
+                ),
+                const Text(
+                  "github.com/Abhi-Survase/activities_app",
+                  style: TextStyle(color: Color.fromARGB(120, 158, 158, 158)),
                 ),
               ],
             )),
